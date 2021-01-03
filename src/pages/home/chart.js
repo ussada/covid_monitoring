@@ -1,4 +1,4 @@
-import React, {useState, createRef, useEffect} from 'react';
+import {useState, createRef, useEffect} from 'react';
 import {DateUtil, Util} from '../../util';
 import {Container, ChartContainer, Chart, ChartLabel} from './styles';
 import {DATE_FORMAT_DATA} from '../../constants';
@@ -54,7 +54,6 @@ const AnimateChart = ({data = [], startDate, endDate}) => {
 
     useEffect(() => {
         if (timer) {
-            console.log('Tick')
             const tick = (conditions.interval || 0) * 1000;
             let interval;
 
@@ -63,7 +62,6 @@ const AnimateChart = ({data = [], startDate, endDate}) => {
                     const stop = nextDate();
 
                     if (stop) {
-                        console.log('Stop')
                         setTimer(false);
                         clearInterval(interval);
                     }
@@ -75,7 +73,7 @@ const AnimateChart = ({data = [], startDate, endDate}) => {
         }
     });
 
-    const intervalOptions = [0.1, 0.2, 0.5, 1, 2, 5];
+    const intervalOptions = [0.1, 0.3, 0.5, 1, 2, 5];
     const limitOptions = [10, 20, 30, 40, 50]
 
     return (
@@ -84,40 +82,29 @@ const AnimateChart = ({data = [], startDate, endDate}) => {
                 showDate
                     ?   <>
                             <div>
-                                <label for="limit">Rows display</label>
+                                <label htmlFor="limit">Rows display</label>
                                 <select id="limit" name="limit" value={conditions.limit} onChange={handleChange} style={{marginLeft: '5px'}}>
                                     {
                                         limitOptions.map(value => (
-                                            <option value={value}>{value}</option>
+                                            <option key={value} value={value}>{value}</option>
                                         ))
                                     }
                                 </select>
 
-                                <label for="interval" style={{marginLeft: '10px'}}>Interval(Second)</label>
+                                <label htmlFor="interval" style={{marginLeft: '10px'}}>Interval(Second)</label>
                                 <select id="interval" name="interval" value={conditions.interval} onChange={handleChange} style={{marginLeft: '5px'}}>
                                     {
                                         intervalOptions.map(value => (
-                                            <option value={value}>{value}</option>
+                                            <option key={value} value={value}>{value}</option>
                                         ))
                                     }
                                 </select>
-                                <input type="checkbox" id="timer" name="timer" checked={timer} onClick={toggleTimer} style={{marginLeft: '10px'}} />
-                                <label for="timer">Animate</label>
+                                <input type="checkbox" id="timer" name="timer" checked={timer} onChange={toggleTimer} style={{marginLeft: '10px'}} />
+                                <label htmlFor="timer">Animate</label>
 
-                                <input type="checkbox" id="repeat" name="repeat" checked={repeat} onClick={toggleRepeat} style={{marginLeft: '10px'}} />
-                                <label for="repeat">Repeat</label>
+                                <input type="checkbox" id="repeat" name="repeat" checked={repeat} onChange={toggleRepeat} style={{marginLeft: '10px'}} />
+                                <label htmlFor="repeat">Repeat</label>
                             </div>
-
-                            {/* <div>
-                                <label for="limit">Rows display</label>
-                                <select id="limit" name="limit" value={conditions.limit} onChange={handleChange} style={{marginLeft: '5px'}}>
-                                    {
-                                        limitOptions.map(value => (
-                                            <option value={value}>{value}</option>
-                                        ))
-                                    }
-                                </select>
-                            </div> */}
 
                             <br/>
 
@@ -149,5 +136,4 @@ const AnimateChart = ({data = [], startDate, endDate}) => {
     )
 };
 
-// export default React.memo(AnimateChart);
 export default AnimateChart;

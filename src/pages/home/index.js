@@ -60,7 +60,7 @@ const Home = () => {
     return (
         <>
             <div>
-                <label for="lastdays">Lastdays</label>
+                <label htmlFor="lastdays">Lastdays</label>
                 <input id="lastdays" name="lastdays" onChange={handleChange} onKeyPress={handleKeypress} value={conditions.lastdays} style={{marginLeft: '5px'}} />
                 <button id="search" type="button" onClick={search} style={{marginLeft: '5px', cursor: 'pointer'}}>Search</button>
             </div>
