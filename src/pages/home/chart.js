@@ -75,6 +75,16 @@ const AnimateChart = ({data = [], startDate, endDate}) => {
 
     const intervalOptions = [0.1, 0.3, 0.5, 1, 2, 5];
     const limitOptions = [10, 20, 30, 40, 50]
+    let motionDelay = undefined;
+
+    if (conditions.interval > 0.5)
+        motionDelay = 500;
+    else
+        motionDelay = conditions.interval * 1000;
+
+    const animateOptions = {
+        motionDelay
+    }
 
     return (
         <>
@@ -112,7 +122,7 @@ const AnimateChart = ({data = [], startDate, endDate}) => {
                                 <ChartContainer>
                                     <strong>Date: {dateToString(stringToDate(showDate, 'M/D/YY'), 'DD/MM/YYYY')}</strong>
 
-                                    <AnimateElements>
+                                    <AnimateElements options={animateOptions}>
                                         {
                                             displayData.map(item => {
                                                 const {id, country, cases, color} = item;

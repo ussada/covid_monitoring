@@ -23,10 +23,11 @@ const usePrevious = value => {
     return ref.current;
 }
 
-const AnimateElements = ({children}) => {
+const AnimateElements = ({children, options = {}}) => {
     const [boundingBox, setBoundingBox] = useState({});
     const [prevBoundingBox, setPrevBoundingBox] = useState({});
     const prevChildren = usePrevious(children);
+    const {motionDelay = 500} = options;
   
     useEffect(() => {
         const newBoundingBox = calculateBoundingBoxes(children);
@@ -61,7 +62,7 @@ const AnimateElements = ({children}) => {
                                 // After the previous frame, remove
                                 // the transistion to play the animation
                                 domNode.style.transform = "";
-                                domNode.style.transition = "transform 500ms";
+                                domNode.style.transition = `transform ${motionDelay}ms`;
                             });
                         });
                     }
