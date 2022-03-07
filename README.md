@@ -1,1 +1,1 @@
-Website: [https://app.ussada.info](https://app.ussada.info)
+Website: [https://ussada.github.io/covid_monitoring/](https://ussada.github.io/covid_monitoring/)
